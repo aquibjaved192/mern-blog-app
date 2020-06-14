@@ -1,0 +1,85 @@
+.container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: fit-content;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.14);
+}
+
+.dividerText {
+  position: relative;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.dividerText span {
+  padding: 7px;
+  font-size: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.dividerText:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  top: 55%;
+  left: 0;
+  z-index: 1;
+}
+
+.btnFacebook {
+  background-color: #405D9D !important;
+  color: #fff !important;
+}
+
+.btnTwitter {
+  background-color: #42AEEC !important;
+  color: #fff !important;
+}
+
+.formFix div {
+  margin-bottom: 0 !important;
+}
+
+.formFix span {
+  width: 40px;
+  height: 48px;
+}
+
+.login {
+  background: none;
+  border: none;
+  color: #405D9D;
+  text-decoration: underline;
+}
+
+.olduser {
+  color: red;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+    box-shadow: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .container {
+    width: 40%;
+  }
+}
