@@ -14,8 +14,18 @@ function Navigation(props) {
     <ul className={style.navItems}>
      <li>Home</li>
      <li>Profile</li>
-     <li>About</li>
-     <li>Contact</li>
+     <li>
+      Options
+      <span className="pl-2">
+       <i className="arrow down"></i>
+      </span>
+     </li>
+     <li>
+      Settings
+      <span className="pl-2">
+       <i className="arrow down"></i>
+      </span>
+     </li>
     </ul>
    </div>
    <form
@@ -71,24 +81,26 @@ class Header extends React.PureComponent {
  render() {
   const { handleSubmit } = this.props;
   return (
-   <div
-    className={`${style.container} d-flex justify-content-between align-items-center pl-4 pr-4 pt-2 pb-2`}
-   >
-    <div>
-     <h3 className="m-0">BLOGAGE</h3>
-    </div>
-    <Navigation onSubmit={this.onSubmit} handleSubmit={handleSubmit} />
-    <div className={style.menuBtn} id="menuOpen" onClick={this.showMobileMenu}>
-     <div className={style.menuIcon} />
-     <div className={style.menuIcon} />
-     <div className={style.menuIcon} />
-    </div>
+   <div className={style.parentContainer}>
     <div
-     className={style.menuClose}
-     id="menuClose"
-     onClick={this.hideMobileMenu}
+     className={`${style.container} d-flex justify-content-between align-items-center pl-4 pr-4 pt-2 pb-2`}
     >
-     X
+     <div>
+      <h3 className="m-0 ml-4">BLOG!T</h3>
+     </div>
+     <Navigation onSubmit={this.onSubmit} handleSubmit={handleSubmit} />
+     <div className={style.menuBtn} id="menuOpen" onClick={this.showMobileMenu}>
+      <div className={style.menuIcon} />
+      <div className={style.menuIcon} />
+      <div className={style.menuIcon} />
+     </div>
+     <div
+      className={style.menuClose}
+      id="menuClose"
+      onClick={this.hideMobileMenu}
+     >
+      X
+     </div>
     </div>
    </div>
   );

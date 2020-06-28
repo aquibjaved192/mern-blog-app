@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Router from 'next/router';
+import { saveLocalStorage } from '../../sharedComponents/helpers';
 
 // Action Types
 const SIGN_UP = 'SIGN_UP';
@@ -43,7 +44,8 @@ export const logIn = (data) => {
    .then((res) => {
     if (res.status === 200) {
      dispatch({ type: SIGN_UP, payload: res.data.data });
-     Router.push('/home');
+     saveLocalStorage('authentication', true);
+     Router.push(`/home?user=${res.data.data.id}`);
     } else {
      dispatch({ type: SIGN_UP, payload: res.data });
     }

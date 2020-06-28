@@ -1,0 +1,81 @@
+.container {
+  margin-top: 70px;
+  padding: 25px;
+}
+
+.title,
+.content {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.14);
+  border-radius: 5px;
+  outline: none;
+  resize: none;
+  margin-bottom: 15px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.content {
+  height: 70vh;
+}
+
+.editors button {
+  float: right;
+  background: #ffffff;
+  border: none;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.14);
+  padding: 5px 15px;
+  outline: none;
+}
+
+.title::-webkit-scrollbar,
+.content::-webkit-scrollbar {
+  width: 2px;
+}
+
+.title::-webkit-scrollbar-track,
+.content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.title::-webkit-scrollbar-thumb,
+.content::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .editors {
+    width: 100%;
+  }
+
+  .content {
+    height: 60vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .editors {
+    width: 100%;
+  }
+
+  .content {
+    height: 70vh;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .editors {
+    width: 70%;
+    margin: auto;
+  }
+
+  .content {
+    height: 60vh;
+  }
+}

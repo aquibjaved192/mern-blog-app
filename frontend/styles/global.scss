@@ -10,6 +10,18 @@ h5,
 h6,
 label,
 span {
- font-weight: 500;
- font-family: 'Fira Sans', sans-serif;
+  font-weight: 500;
+  font-family: 'Fira Sans', sans-serif;
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0px 2px 2px 0;
+  display: inline-block;
+  padding: 2px;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
