@@ -44,8 +44,8 @@ export const logIn = (data) => {
    .then((res) => {
     if (res.status === 200) {
      dispatch({ type: SIGN_UP, payload: res.data.data });
-     saveLocalStorage('authentication', true);
-     Router.push(`/home?user=${res.data.data.id}`);
+     saveLocalStorage('user', res.data.data);
+     Router.push('/');
     } else {
      dispatch({ type: SIGN_UP, payload: res.data });
     }

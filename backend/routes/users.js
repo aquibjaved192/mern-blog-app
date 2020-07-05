@@ -13,7 +13,7 @@ router.route('/login').post((req, res) => {
      .then((result) => {
       if (result) {
        const data = {
-        data: { id: user._id, name: user.name },
+        data: { id: user._id, name: user.name, profession: user.profession },
         status: 200,
         message: 'success',
        };
@@ -46,7 +46,8 @@ router.route('/signup').post((req, res) => {
     const email = req.body.email;
     const password = hash;
     const name = req.body.name;
-    const newUser = new User({ email, password, name });
+    const profession = req.body.profession;
+    const newUser = new User({ email, password, name, profession });
     newUser
      .save()
      .then(() => {

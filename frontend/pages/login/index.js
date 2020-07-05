@@ -5,16 +5,21 @@ import RenderField from '../../sharedComponents/renderField';
 import { withRouter } from 'next/router';
 import { required, email, minLength8 } from '../../validation/validations';
 import { logIn } from '../../redux/reducers/signupReducer';
-import style from '../index.module.scss';
+import { getLocalStorage } from '../../sharedComponents/helpers';
+import style from '../signup/index.module.scss';
 
 class Login extends React.Component {
- constructor(props) {
-  super(props);
+ componentDidMount() {
+  const user = getLocalStorage('user');
+  const { router } = this.props;
+  if (user) {
+   router.push('/');
+  }
  }
 
  goToSignUp = () => {
   const { router } = this.props;
-  router.push('/');
+  router.push('/signup');
  };
 
  onSubmit = (values) => {

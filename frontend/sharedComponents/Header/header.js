@@ -5,16 +5,37 @@ import RenderField from '../renderField';
 import { withRouter } from 'next/router';
 import { maxLength50, minLength8 } from '../../validation/validations';
 import style from './header.module.scss';
+import { removeLocalStorage, getLocalStorage } from '../helpers';
 
 function Navigation(props) {
- const { handleSubmit, onSubmit } = props;
+ const { handleSubmit, onSubmit, onClickLogout, onClickLogin } = props;
+ const user = getLocalStorage('user');
  return (
   <>
+   <form
+    id="searchForm"
+    className={style.searchForm}
+    onSubmit={handleSubmit(onSubmit)}
+   >
+    <Field
+     name="search"
+     className="form-control form-control-lg"
+     component={RenderField}
+     validate={[maxLength50, minLength8]}
+     type="text"
+     placeholder="Search by title..."
+     size="lg"
+    />
+    <button type="submit" className={`${style.searchBtn}`}>
+     Search
+    </button>
+   </form>
    <div id="navList" className={style.navList}>
-    <ul className={style.navItems}>
-     <li>Home</li>
-     <li>Profile</li>
-     <li>
+    {user ? (
+     <ul className={style.navItems}>
+      <li>Home</li>
+      <li>Profile</li>
+      {/* <li>
       Options
       <span className="pl-2">
        <i className="arrow down"></i>
@@ -25,32 +46,15 @@ function Navigation(props) {
       <span className="pl-2">
        <i className="arrow down"></i>
       </span>
-     </li>
-    </ul>
+     </li> */}
+      <li onClick={onClickLogout}>Sign Out</li>
+     </ul>
+    ) : (
+     <ul className={style.navItems}>
+      <li onClick={onClickLogin}>SignIn</li>
+     </ul>
+    )}
    </div>
-   <form
-    id="searchForm"
-    className={style.searchForm}
-    onSubmit={handleSubmit(onSubmit)}
-   >
-    <div className={`form-group input-group m-0 ${style.formFix}`}>
-     <Field
-      name="search"
-      className="form-control form-control-lg"
-      component={RenderField}
-      validate={[maxLength50, minLength8]}
-      type="text"
-      placeholder="Search by title..."
-      size="lg"
-     />
-     <button type="submit" className={`input-group-text ${style.searchBtn}`}>
-      <div className="input-group-prepend">
-       {' '}
-       <i className="fa fa-search"></i>{' '}
-      </div>
-     </button>
-    </div>
-   </form>
   </>
  );
 }
@@ -65,7 +69,7 @@ class Header extends React.PureComponent {
  };
 
  showMobileMenu = () => {
-  document.getElementById('searchForm').style.display = 'block';
+  document.getElementById('searchForm').style.display = 'flex';
   document.getElementById('navList').style.display = 'block';
   document.getElementById('menuOpen').style.display = 'none';
   document.getElementById('menuClose').style.display = 'block';
@@ -78,6 +82,16 @@ class Header extends React.PureComponent {
   document.getElementById('menuOpen').style.display = 'block';
  };
 
+ onClickLogout = () => {
+  removeLocalStorage('user');
+  window.location.replace('/');
+ };
+
+ onClickLogin = () => {
+  const { router } = this.props;
+  router.push('/login');
+ };
+
  render() {
   const { handleSubmit } = this.props;
   return (
@@ -88,7 +102,12 @@ class Header extends React.PureComponent {
      <div>
       <h3 className="m-0 ml-4">BLOG!T</h3>
      </div>
-     <Navigation onSubmit={this.onSubmit} handleSubmit={handleSubmit} />
+     <Navigation
+      onClickLogout={this.onClickLogout}
+      onSubmit={this.onSubmit}
+      handleSubmit={handleSubmit}
+      onClickLogin={this.onClickLogin}
+     />
      <div className={style.menuBtn} id="menuOpen" onClick={this.showMobileMenu}>
       <div className={style.menuIcon} />
       <div className={style.menuIcon} />

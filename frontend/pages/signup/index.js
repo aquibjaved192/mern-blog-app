@@ -1,20 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import RenderField from '../sharedComponents/renderField';
+import RenderField from '../../sharedComponents/renderField';
 import { withRouter } from 'next/router';
 import {
  required,
  email,
  minLength8,
  maxLength20,
-} from '../validation/validations';
-import { signUp } from '../redux/reducers/signupReducer';
+} from '../../validation/validations';
+import { signUp } from '../../redux/reducers/signupReducer';
+import { getLocalStorage } from '../../sharedComponents/helpers';
 import style from './index.module.scss';
 
-class App extends React.Component {
- constructor(props) {
-  super(props);
+class SignUp extends React.Component {
+ componentDidMount() {
+  const user = getLocalStorage('user');
+  const { router } = this.props;
+  if (user) {
+   router.push('/');
+  }
  }
 
  onSubmit = (values) => {
@@ -71,6 +76,23 @@ class App extends React.Component {
          validate={[required, maxLength20]}
          type="text"
          placeholder="Full Name"
+         size="lg"
+        />
+       </div>
+       <div className={`form-group input-group ${style.formFix}`}>
+        <div className="input-group-prepend">
+         <span className="input-group-text">
+          {' '}
+          <i className="fa fa-user"></i>{' '}
+         </span>
+        </div>
+        <Field
+         name="profession"
+         className="form-control form-control-lg"
+         component={RenderField}
+         validate={[required, maxLength20]}
+         type="text"
+         placeholder="Your Profession"
          size="lg"
         />
        </div>
@@ -144,5 +166,5 @@ const mapDispatchToProps = (dispatch) => {
 export default withRouter(
  reduxForm({
   form: 'signup',
- })(connect(mapStateToProps, mapDispatchToProps)(App))
+ })(connect(mapStateToProps, mapDispatchToProps)(SignUp))
 );

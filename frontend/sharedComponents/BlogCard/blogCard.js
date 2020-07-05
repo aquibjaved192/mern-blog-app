@@ -3,23 +3,41 @@ import style from './blogCard.module.scss';
 
 class BlogCard extends React.PureComponent {
  render() {
+  const { blog } = this.props;
+  const monthArray = [
+   'January',
+   'February',
+   'March',
+   'April',
+   'May',
+   'June',
+   'July',
+   'August',
+   'September',
+   'October',
+   'November',
+   'December',
+  ];
+  const date = new Date(blog.postDate);
+  const day = date.getDate();
+  const month = monthArray[date.getMonth()];
+  const year = date.getFullYear();
   return (
    <div className={style.blogCard}>
     <div className={`d-flex align-items-center text-left ${style.author}`}>
      <img height="100px" width="100px" src={defaultImage} alt="default-image" />
      <div>
-      <h6 className="m-0">
-       Aquib Javed, <small>Software Engineer</small>
-      </h6>
-      <small>Company Name</small>
-      <p className={style.date}>June 20, 2020</p>
+      <h6 className="m-0">{blog.authorName}</h6>
+      <small>{blog.authorProfession}</small>
+      <p className={style.date}>
+       {month}&nbsp;{day},&nbsp;{year}
+      </p>
      </div>
     </div>
     <div>
-     <h6>This is a long and proper blog title</h6>
+     <h6>{blog.title}</h6>
      <small>
-      These are the few words to show in the paragraph section which consist of
-      words written in the beginning of the blog...
+      {blog.content}...
       <span className={style.continue}>Continue Reading</span>
      </small>
     </div>

@@ -37,7 +37,7 @@
 }
 
 .navList {
-  width: 250px;
+  width: 273px;
   position: absolute;
   right: 0;
   top: 115px;
@@ -84,9 +84,16 @@
   color: lightgray;
 }
 
+.searchForm button {
+  border: 1px solid lightgray;
+  border-left: none;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
 @media only screen and (min-width: 1024px) {
   .navList {
-    width: 50%;
+    width: 20%;
     position: relative;
     top: 0;
     box-shadow: none;
@@ -122,6 +129,12 @@
     position: relative;
     top: 0;
     right: 0;
-    display: block;
+    display: flex;
+    width: 50%;
   }
+
+  .searchForm div {
+    width: 100%;
+  }
+
 }

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import Router from 'next/router';
-import { saveLocalStorage } from '../../sharedComponents/helpers';
 
 // Action Types
 const CREATE_BLOG = 'CREATE_BLOG';
@@ -20,10 +19,9 @@ export const create = (data) => {
    responseType: 'json',
   })
    .then((res) => {
-    console.log(res);
     if (res.status === 200) {
      dispatch({ type: CREATE_BLOG, payload: res.data.data });
-     //Router.push(`/home?user=${res.data.data.id}`);
+     Router.push('/home');
     } else {
      //dispatch({ type: SIGN_UP, payload: res.data });
     }

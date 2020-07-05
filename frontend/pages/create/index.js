@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../../sharedComponents/Header/header';
 import { create } from '../../redux/reducers/createBlogReducer';
 import style from './create.module.scss';
+import { getLocalStorage } from '../../sharedComponents/helpers';
 
 class CreateBlogPage extends React.Component {
  constructor(props) {
@@ -12,6 +13,14 @@ class CreateBlogPage extends React.Component {
    title: '',
    content: '',
   };
+ }
+
+ componentDidMount() {
+  const user = getLocalStorage('user');
+  const { router } = this.props;
+  if (!user) {
+   router.push('/login');
+  }
  }
 
  handleChange = (e, fieldName) => {
@@ -24,16 +33,14 @@ class CreateBlogPage extends React.Component {
   const { title, content } = this.state;
   const { create, router } = this.props;
   const date = new Date();
-  const userId = router.query.user;
-  if (userId && title && content) {
+  if (title && content) {
    const data = {
-    userId: userId,
-    blog: {
-     title: title,
-     content: content,
-     publishDate: new Date(),
-     blogId: userId + date.getTime().toString(),
-    },
+    id: user.id,
+    name: user.name,
+    profession: user.profession,
+    title: title,
+    content: content,
+    date: date,
    };
    create(data);
   }

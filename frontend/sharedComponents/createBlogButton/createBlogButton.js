@@ -4,12 +4,9 @@ import style from './createBlog.module.scss';
 
 class CreateBlog extends React.PureComponent {
  render() {
-  const { router, userId } = this.props;
+  const { router } = this.props;
   return (
-   <div
-    onClick={() => router.push(`/create?user=${userId}`)}
-    className={style.container}
-   >
+   <div onClick={() => router.push('/create')} className={style.container}>
     <span>&#9998;</span>
    </div>
   );
