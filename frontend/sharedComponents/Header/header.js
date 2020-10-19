@@ -8,7 +8,14 @@ import style from './header.module.scss';
 import { removeLocalStorage, getLocalStorage } from '../helpers';
 
 function Navigation(props) {
- const { handleSubmit, onSubmit, onClickLogout, onClickLogin } = props;
+ const {
+  handleSubmit,
+  onSubmit,
+  onClickLogout,
+  onClickLogin,
+  onClickHome,
+  onClickProfile,
+ } = props;
  const user = getLocalStorage('user');
  return (
   <>
@@ -33,8 +40,8 @@ function Navigation(props) {
    <div id="navList" className={style.navList}>
     {user ? (
      <ul className={style.navItems}>
-      <li>Home</li>
-      <li>Profile</li>
+      <li onClick={onClickHome}>Home</li>
+      <li onClick={() => onClickProfile(user.id)}>Profile</li>
       {/* <li>
       Options
       <span className="pl-2">
@@ -92,6 +99,16 @@ class Header extends React.PureComponent {
   router.push('/login');
  };
 
+ onClickHome = () => {
+  const { router } = this.props;
+  router.push('/');
+ };
+
+ onClickProfile = (id) => {
+  const { router } = this.props;
+  router.push(`/profile/${id}`);
+ };
+
  render() {
   const { handleSubmit } = this.props;
   return (
@@ -99,14 +116,16 @@ class Header extends React.PureComponent {
     <div
      className={`${style.container} d-flex justify-content-between align-items-center pl-4 pr-4 pt-2 pb-2`}
     >
-     <div>
-      <h3 className="m-0 ml-4">BLOG!T</h3>
-     </div>
+     <button className="border-0 bg-transparent" onClick={this.onClickHome}>
+      <h3 className="m-0">BLOG!T</h3>
+     </button>
      <Navigation
       onClickLogout={this.onClickLogout}
       onSubmit={this.onSubmit}
       handleSubmit={handleSubmit}
       onClickLogin={this.onClickLogin}
+      onClickHome={this.onClickHome}
+      onClickProfile={this.onClickProfile}
      />
      <div className={style.menuBtn} id="menuOpen" onClick={this.showMobileMenu}>
       <div className={style.menuIcon} />

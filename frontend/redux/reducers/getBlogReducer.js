@@ -1,27 +1,24 @@
 import axios from 'axios';
-import Router from 'next/router';
 
 // Action Types
-const CREATE_BLOG = 'CREATE_BLOG';
+const GET_BLOG = 'GET_BLOG';
 
 // Action dispatchers
 
-export const create = (data) => {
- const url = `http://localhost:5000/createBlog`;
+export const getBlog = (id) => {
+ const url = `http://localhost:5000/getBlog/${id}`;
  return (dispatch) => {
   return axios({
    url,
    headers: {
     'Content-Type': 'application/json',
    },
-   method: 'post',
-   data,
+   method: 'get',
    responseType: 'json',
   })
    .then((res) => {
     if (res.status === 200) {
-     dispatch({ type: CREATE_BLOG, payload: res.data.data });
-     Router.push('/');
+     dispatch({ type: GET_BLOG, payload: res.data.data });
     } else {
      //dispatch({ type: SIGN_UP, payload: res.data });
     }
@@ -36,13 +33,13 @@ const initialState = {
 
 // Reducer
 
-const createBlogReducer = (state = initialState, action) => {
+const getBlogReducer = (state = initialState, action) => {
  switch (action.type) {
-  case CREATE_BLOG:
+  case GET_BLOG:
    return { ...state, data: action.payload };
   default:
    return { ...state };
  }
 };
 
-export default createBlogReducer;
+export default getBlogReducer;

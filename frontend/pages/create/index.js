@@ -31,7 +31,8 @@ class CreateBlogPage extends React.Component {
 
  onSubmit = () => {
   const { title, content } = this.state;
-  const { create, router } = this.props;
+  const { create } = this.props;
+  const user = getLocalStorage('user');
   const date = new Date();
   if (title && content) {
    const data = {
@@ -47,16 +48,21 @@ class CreateBlogPage extends React.Component {
  };
 
  render() {
+  const { title, content } = this.state;
   return (
    <div className={style.container}>
     <Header />
     <div className={style.editors}>
-     <textarea
-      placeholder="Enter title here..."
-      className={style.title}
-      rows="1"
-      onChange={(e) => this.handleChange(e, 'title')}
-     />
+     <div className="mb-5">
+      <textarea
+       placeholder="Enter title here..."
+       className={style.title}
+       rows="2"
+       onChange={(e) => this.handleChange(e, 'title')}
+       maxlength="70"
+      />
+      <small className="float-right">Title length: {title.length}/70</small>
+     </div>
      <textarea
       placeholder="Write your content here..."
       className={style.content}

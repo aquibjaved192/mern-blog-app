@@ -1,0 +1,25 @@
+.container {
+  margin-top: 70px;
+}
+
+.coverPhotoContainer {
+  height: 50vh;
+  width: 100%;
+  position: relative;
+}
+
+.coverPhoto {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.profileImage {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  height: 100px;
+  width: 100px;
+  border-radius: 6px;
+}
