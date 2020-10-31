@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import RenderField from '../renderField';
 import { withRouter } from 'next/router';
 import { maxLength50, minLength8 } from '../../validation/validations';
+import { search } from '../../redux/reducers/getSearchReducer';
 import style from './header.module.scss';
 import { removeLocalStorage, getLocalStorage } from '../helpers';
 
@@ -71,9 +72,12 @@ class Header extends React.PureComponent {
   super(props);
  }
 
- onSubmit = (values) => {
-  const { searchBlogs } = this.props;
-  searchBlogs(values.search);
+ onSubmit = async (values) => {
+  const { search, router } = this.props;
+  if (router.pathname !== '/') {
+   await router.push('/');
+  }
+  search(values.search);
  };
 
  showMobileMenu = () => {
@@ -149,7 +153,9 @@ class Header extends React.PureComponent {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => {
- return {};
+ return {
+  search: (key) => dispatch(search(key)),
+ };
 };
 
 export default withRouter(
