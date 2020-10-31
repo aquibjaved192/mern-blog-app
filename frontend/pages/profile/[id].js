@@ -57,7 +57,7 @@ class Profile extends React.Component {
     <div className="p-2 align-items-center d-flex flex-wrap justify-content-start">
      {blogCards}
     </div>
-    {user.id === router.query.id && <CreateBlogButton />}
+    {user && user.id === router.query.id && <CreateBlogButton />}
    </div>
   );
  }
