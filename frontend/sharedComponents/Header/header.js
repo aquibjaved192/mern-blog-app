@@ -71,8 +71,9 @@ class Header extends React.PureComponent {
   super(props);
  }
 
- onSubmit = () => {
-  console.log('submit');
+ onSubmit = (values) => {
+  const { searchBlogs } = this.props;
+  searchBlogs(values.search);
  };
 
  showMobileMenu = () => {

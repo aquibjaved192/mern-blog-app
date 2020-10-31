@@ -40,4 +40,20 @@ module.exports = {
    })
    .catch((err) => res.status(400).json('Error: ' + err));
  },
+
+ getSearch: (req, res) => {
+  Blog.find()
+   .then((blogs) => {
+    const matchedBlogs = [];
+    blogs.forEach((blog) => {
+     if (blog.title.toLowerCase().includes(req.params.key.toLowerCase())) {
+      blog.content = blog.content.substring(0, 120);
+      matchedBlogs.push(blog);
+     }
+    });
+    const data = { data: matchedBlogs };
+    res.status(200).json(data);
+   })
+   .catch((err) => res.status(400).json('Error: ' + err));
+ },
 };
